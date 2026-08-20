@@ -150,9 +150,9 @@ export function PostStream({
           {error ? <p className="text-sm text-accent-dark">{error}</p> : null}
 
           {!allowCompose && signedIn ? (
-            <div className="flex flex-col gap-3 rounded-2xl border border-teal/25 bg-[linear-gradient(135deg,#fffaf3,#e7f4ea)] p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 rounded-2xl border border-teal/25 bg-muted p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-display text-xl">You&apos;re in the room.</p>
+                <p className="font-display text-xl text-ink">You&apos;re in the room.</p>
                 <p className="mt-1 text-sm text-ink-soft">
                   Like, comment, and save posts. Questions belong in Q&amp;A so the feed stays readable.
                 </p>
