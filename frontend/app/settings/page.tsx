@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Avatar } from "@/components/Avatar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { apiFetch, ApiError } from "@/lib/api";
 import { PasswordInput } from "@/components/AuthForm";
 
@@ -68,7 +69,16 @@ export default function SettingsPage() {
       <div className="min-h-full">
         <Header />
         <main className="mx-auto max-w-xl px-4 py-8 sm:px-6 sm:py-10">
-          <p>
+          <h1 className="font-display text-3xl sm:text-4xl">Settings</h1>
+          <p className="mt-2 text-ink-soft">Choose a theme, or log in to change your photo and password.</p>
+          <section className="mt-8 rounded-2xl border border-line bg-card p-5">
+            <h2 className="font-display text-2xl">Appearance</h2>
+            <p className="mt-1 text-sm text-ink-soft">Choose a light or dark theme. It stays on this device.</p>
+            <div className="mt-4">
+              <ThemeToggle />
+            </div>
+          </section>
+          <p className="mt-8">
             <a href="/login" className="font-semibold text-teal">
               Log in
             </a>{" "}
@@ -84,7 +94,15 @@ export default function SettingsPage() {
       <Header />
       <main className="mx-auto max-w-xl px-4 py-8 sm:px-6 sm:py-10">
         <h1 className="font-display text-3xl sm:text-4xl">Settings</h1>
-        <p className="mt-2 text-ink-soft">Update your profile photo or password.</p>
+        <p className="mt-2 text-ink-soft">Update your profile photo, theme, or password.</p>
+
+        <section className="mt-8 rounded-2xl border border-line bg-card p-5">
+          <h2 className="font-display text-2xl">Appearance</h2>
+          <p className="mt-1 text-sm text-ink-soft">Choose a light or dark theme. It stays on this device.</p>
+          <div className="mt-4">
+            <ThemeToggle />
+          </div>
+        </section>
 
         <div className="mt-8 flex items-center gap-4 rounded-2xl border border-line bg-card p-5">
           <Avatar name={me.full_name} src={me.profile_picture_url} size="lg" />

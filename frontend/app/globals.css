@@ -9,6 +9,22 @@
   --accent-dark: #9b4318;
   --teal: #2a6b63;
   --card: #fffaf3;
+  --muted: #efe7d8;
+  --shadow: 22, 33, 30;
+}
+
+html.dark {
+  color-scheme: dark;
+  --paper: #121816;
+  --ink: #f3ece3;
+  --ink-soft: #b8c2be;
+  --line: #2d3a36;
+  --accent: #e08a55;
+  --accent-dark: #f0b089;
+  --teal: #7eb6a8;
+  --card: #1a221f;
+  --muted: #24302c;
+  --shadow: 0, 0, 0;
 }
 
 @theme inline {
@@ -20,6 +36,7 @@
   --color-accent-dark: var(--accent-dark);
   --color-teal: var(--teal);
   --color-card: var(--card);
+  --color-muted: var(--muted);
   --font-sans: var(--font-manrope);
   --font-display: var(--font-fraunces);
 }
@@ -63,13 +80,17 @@ h3,
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .card-hover:hover {
     transform: translateY(-5px);
-    box-shadow: 0 18px 40px rgba(22, 33, 30, 0.08);
+    box-shadow: 0 18px 40px rgba(var(--shadow), 0.08);
   }
 
   a,
   button {
     transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, transform 0.25s ease;
   }
+}
+
+html.dark .card-hover:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {

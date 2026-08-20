@@ -114,7 +114,7 @@ export function HomeHub({ me }: { me: UserMe }) {
 
   return (
     <div ref={root} className="relative flex min-h-full flex-col">
-      <div className="welcome-overlay pointer-events-none invisible fixed inset-0 z-50 flex items-center justify-center bg-ink px-6 text-center text-paper opacity-0">
+      <div className="welcome-overlay pointer-events-none invisible fixed inset-0 z-50 flex items-center justify-center bg-[#111816] px-6 text-center text-[#f4efe6] opacity-0">
         <div>
           <p className="welcome-kicker text-xs font-semibold uppercase tracking-[0.22em] text-[#e7c9a8]">
             You&apos;re in
@@ -192,7 +192,7 @@ export function HomeHub({ me }: { me: UserMe }) {
                 <Link
                   key={post.id}
                   href={`/community#${post.id}`}
-                  className="block rounded-2xl bg-paper px-4 py-3 transition hover:bg-[#efe7d8]"
+                  className="block rounded-2xl bg-paper px-4 py-3 transition hover:bg-muted"
                 >
                   <div className="flex items-center gap-3">
                     <Avatar name={post.author.full_name} src={post.author.profile_picture_url} size="sm" />
@@ -224,7 +224,7 @@ export function HomeHub({ me }: { me: UserMe }) {
             {profileGaps.length > 0 ? (
               <Link
                 href="/settings"
-                className="hub-panel card-hover block rounded-3xl border border-accent/30 bg-[#f8eee6] p-5"
+                className="hub-panel card-hover block rounded-3xl border border-accent/30 bg-muted p-5"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-dark">Your space</p>
                 <h2 className="font-display mt-1 text-2xl">Finish your profile</h2>

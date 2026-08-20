@@ -62,7 +62,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-full flex-col lg:flex-row">
-      <div className="sticky top-0 z-30 flex items-center justify-between bg-ink px-4 py-3 text-paper lg:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between bg-[#111816] px-4 py-3 text-[#f4efe6] lg:hidden">
         <BrandMark compact inverted href="/admin" />
         <button
           type="button"
@@ -84,7 +84,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       ) : null}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-72 max-w-[85vw] flex-col bg-ink px-5 py-6 text-paper transition-transform duration-200 lg:static lg:flex lg:w-64 lg:max-w-none lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-72 max-w-[85vw] flex-col bg-[#111816] px-5 py-6 text-[#f4efe6] transition-transform duration-200 lg:static lg:flex lg:w-64 lg:max-w-none lg:translate-x-0 ${
           menuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >

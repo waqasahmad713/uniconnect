@@ -266,7 +266,7 @@ function ActionButton({
       type="button"
       onClick={onClick}
       className={`min-h-11 rounded-full px-3 py-2 text-sm font-semibold ${
-        active ? "bg-[#f3ead6] text-accent-dark" : "bg-paper text-ink-soft hover:text-ink"
+        active ? "bg-muted text-accent-dark" : "bg-paper text-ink-soft hover:text-ink"
       }`}
     >
       {children}

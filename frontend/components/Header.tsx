@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { apiFetch } from "@/lib/api";
 import { Avatar } from "@/components/Avatar";
 import { BrandMark } from "@/components/BrandMark";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { gsap, useGSAP } from "@/lib/gsap";
 import type { UserMe } from "@/types";
 
@@ -90,6 +91,7 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 text-sm lg:flex">
+          <ThemeToggle compact />
           {me ? (
             <>
               {me.is_admin === true ? (
@@ -135,20 +137,23 @@ export function Header() {
             </>
           )}
         </div>
-        <button
-          type="button"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line text-ink lg:hidden"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle compact />
+          <button
+            type="button"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line text-ink"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <span className="flex flex-col gap-1.5">
             <span className={`block h-0.5 w-5 bg-ink transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
             <span className={`block h-0.5 w-5 bg-ink transition ${menuOpen ? "opacity-0" : ""}`} />
             <span className={`block h-0.5 w-5 bg-ink transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
           </span>
-        </button>
+          </button>
+        </div>
       </div>
 
       {menuOpen ? (

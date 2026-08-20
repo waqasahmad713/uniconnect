@@ -2,6 +2,7 @@
 
 import { FormEvent, InputHTMLAttributes, ReactNode, useRef, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEnterMotion } from "@/lib/motion";
 import { gsap, useGSAP } from "@/lib/gsap";
 
@@ -37,7 +38,7 @@ export function AuthShell({
 
   return (
     <div ref={root} className="grid min-h-full lg:grid-cols-2">
-      <aside className="relative hidden overflow-hidden bg-ink px-10 py-10 text-paper lg:flex lg:flex-col">
+      <aside className="relative hidden overflow-hidden bg-[#16211e] px-10 py-10 text-[#fffaf3] lg:flex lg:flex-col">
         <span className="auth-orb absolute -left-10 top-16 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
         <span className="auth-orb absolute bottom-10 right-0 h-56 w-56 rounded-full bg-teal/30 blur-3xl" />
         <BrandMark inverted />
@@ -54,10 +55,14 @@ export function AuthShell({
         </div>
       </aside>
       <div className="flex min-h-full flex-col bg-paper">
-        <header className="border-b border-line bg-card/80 px-4 py-3 sm:px-6 lg:hidden">
+        <header className="flex items-center justify-between border-b border-line bg-card/80 px-4 py-3 sm:px-6 lg:hidden">
           <BrandMark compact />
+          <ThemeToggle compact />
         </header>
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-8 sm:px-6 sm:py-12">
+          <div className="mb-6 hidden justify-end lg:flex">
+            <ThemeToggle compact />
+          </div>
           <p data-enter className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">
             Abdul Wali Khan University Mardan
           </p>
