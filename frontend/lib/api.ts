@@ -34,7 +34,10 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
   }
 
   const data = (await response.json().catch(() => ({}))) as {
-    detail?: string | { msg?: string; message?: string; verification_url?: string }[];
+    detail?:
+      | string
+      | { msg?: string; message?: string; verification_url?: string }[]
+      | { message?: string; verification_url?: string };
     message?: string;
     verification_url?: string;
   };
