@@ -18,21 +18,27 @@ const nav = [
 export function AdminShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [ready, setReady] = useState(false);
   const [allowed, setAllowed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
     apiFetch<{ is_admin: boolean }>("/api/auth/me")
       .then((me) => {
-        setAllowed(me.is_admin);
-        setReady(true);
+        if (cancelled) return;
+        if (me.is_admin === true) {
+          setAllowed(true);
+          return;
+        }
+        router.replace("/");
       })
       .catch(() => {
-        setAllowed(false);
-        setReady(true);
+        if (!cancelled) router.replace("/login");
       });
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -50,26 +56,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
     router.push("/login");
   }
 
-  if (!ready) {
-    return <p className="p-6 text-ink-soft sm:p-8">Loading admin console…</p>;
-  }
-
   if (!allowed) {
-    return (
-      <main className="mx-auto max-w-lg px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-3xl sm:text-4xl">Admin console</h1>
-        <p className="mt-4 text-ink-soft">
-          This area is only for site administrators. Members use the feed, questions, and
-          settings.
-        </p>
-        <Link
-          href="/login"
-          className="mt-6 inline-flex min-h-12 items-center rounded-full bg-accent px-5 font-semibold text-white"
-        >
-          Log in
-        </Link>
-      </main>
-    );
+    return <p className="p-6 text-ink-soft sm:p-8">Loading…</p>;
   }
 
   return (

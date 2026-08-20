@@ -92,7 +92,7 @@ export function Header() {
         <div className="hidden items-center gap-2 text-sm lg:flex">
           {me ? (
             <>
-              {me.is_admin ? (
+              {me.is_admin === true ? (
                 <Link href="/admin" className="rounded-full px-3 py-2 font-semibold text-teal">
                   Admin
                 </Link>
@@ -182,7 +182,7 @@ export function Header() {
                 <Link href="/discover" className="rounded-xl px-3 py-3 hover:bg-paper">
                   Discover people
                 </Link>
-                {me.is_admin ? (
+                {me.is_admin === true ? (
                   <Link href="/admin" className="rounded-xl px-3 py-3 font-semibold text-teal">
                     Admin
                   </Link>
