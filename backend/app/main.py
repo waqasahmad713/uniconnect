@@ -1,16 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
 from app.admin.router import router as admin_router
 from app.auth.router import router as auth_router
 from app.connections.router import router as connections_router
 from app.core.config import settings
-from app.core.files import upload_root
 from app.database import models as database_models  # noqa: F401
 from app.database.session import engine
 from app.events.router import router as events_router
+from app.media.router import router as media_router
 from app.notifications.router import router as notifications_router
 from app.opportunities.router import router as opportunities_router
 from app.posts.router import router as posts_router
@@ -39,14 +38,7 @@ app.include_router(opportunities_router)
 app.include_router(events_router)
 app.include_router(notifications_router)
 app.include_router(admin_router)
-
-uploads_dir = upload_root()
-try:
-    uploads_dir.mkdir(parents=True, exist_ok=True)
-    (uploads_dir / "avatars").mkdir(exist_ok=True)
-    app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
-except OSError:
-    pass
+app.include_router(media_router)
 
 
 @app.get("/")

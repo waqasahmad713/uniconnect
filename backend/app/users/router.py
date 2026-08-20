@@ -88,7 +88,7 @@ async def upload_photo(
     user: Annotated[User, Depends(get_current_verified_user)],
     file: Annotated[UploadFile, File()],
 ) -> UserMe:
-    user.profile_picture_url = await save_avatar(str(user.id), file)
+    user.profile_picture_url = await save_avatar(db, str(user.id), file)
     db.commit()
     db.refresh(user)
     return to_user_me(user)

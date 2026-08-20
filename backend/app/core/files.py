@@ -1,19 +1,11 @@
-import secrets
-from pathlib import Path
+import uuid
 
 from fastapi import HTTPException, UploadFile, status
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
-from app.core.config import settings
+from app.media.models import StoredFile
 
-
-def upload_root() -> Path:
-    if settings.is_production:
-        return Path("/tmp/uniconnect-uploads")
-    return Path(__file__).resolve().parents[2] / "uploads"
-
-
-UPLOAD_ROOT = upload_root()
-AVATAR_DIR = UPLOAD_ROOT / "avatars"
 MAX_AVATAR_BYTES = 2 * 1024 * 1024
 
 ALLOWED_TYPES = {
@@ -33,7 +25,7 @@ def _extension_from_bytes(header: bytes) -> str | None:
     return None
 
 
-async def save_avatar(user_id: str, upload: UploadFile) -> str:
+async def save_avatar(db: Session, user_id: str, upload: UploadFile) -> str:
     content_type = (upload.content_type or "").lower()
     if content_type not in ALLOWED_TYPES:
         raise HTTPException(
@@ -55,10 +47,19 @@ async def save_avatar(user_id: str, upload: UploadFile) -> str:
             "The file contents do not match the image type.",
         )
 
-    AVATAR_DIR.mkdir(parents=True, exist_ok=True)
-    for old in AVATAR_DIR.glob(f"{user_id}*"):
-        old.unlink(missing_ok=True)
+    owner = uuid.UUID(user_id)
+    old_files = db.scalars(
+        select(StoredFile).where(StoredFile.owner_id == owner, StoredFile.kind == "avatar")
+    ).all()
+    for old in old_files:
+        db.delete(old)
 
-    filename = f"{user_id}-{secrets.token_hex(4)}{expected}"
-    (AVATAR_DIR / filename).write_bytes(data)
-    return f"{settings.backend_url}/uploads/avatars/{filename}"
+    stored = StoredFile(
+        owner_id=owner,
+        kind="avatar",
+        content_type=content_type,
+        data=data,
+    )
+    db.add(stored)
+    db.flush()
+    return f"/api/files/{stored.id}"

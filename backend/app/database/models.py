@@ -1,6 +1,7 @@
 from app.connections.models import Connection
 from app.events.models import Event
 from app.messages.models import Conversation, ConversationParticipant, Message
+from app.media.models import StoredFile
 from app.notifications.models import Notification
 from app.opportunities.models import Opportunity, OpportunitySkill
 from app.posts.models import Bookmark, Category, Comment, Like, Post, PostTag, Tag
@@ -31,6 +32,7 @@ __all__ = [
     "Post",
     "PostTag",
     "Report",
+    "StoredFile",
     "Tag",
     "User",
     "UserSkill",

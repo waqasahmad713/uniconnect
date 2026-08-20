@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { ApiError, apiFetch } from "@/lib/api";
+import { mediaUrl } from "@/lib/media";
 import { timeAgo } from "@/lib/time";
 import { typeStyle } from "@/lib/postType";
 import type { Post, UserPublic } from "@/types";
@@ -156,7 +157,7 @@ export function FeedCard({
       {post.image_url ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={post.image_url}
+          src={mediaUrl(post.image_url)}
           alt=""
           className="mt-4 max-h-96 w-full rounded-xl object-cover"
         />
