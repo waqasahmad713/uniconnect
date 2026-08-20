@@ -29,6 +29,7 @@ from app.core.security import (
     ACCESS_COOKIE_NAME,
     create_access_token,
     hash_password,
+    password_needs_rehash,
     verify_password,
 )
 from app.database.session import get_db
@@ -159,6 +160,8 @@ def login(
 
     if settings.is_listed_admin_email(user.email) and not user.is_admin:
         user.is_admin = True
+    if password_needs_rehash(user.hashed_password):
+        user.hashed_password = hash_password(payload.password)
     user.last_login_at = utc_now()
     db.commit()
     token = create_access_token(user_id=str(user.id), token_version=user.token_version)

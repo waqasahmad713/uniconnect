@@ -33,18 +33,26 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
     return undefined as T;
   }
 
-  const data = (await response.json().catch(() => ({}))) as {
+  const raw = await response.text();
+  let data: {
     detail?:
       | string
       | { msg?: string; message?: string; verification_url?: string }[]
       | { message?: string; verification_url?: string };
     message?: string;
     verification_url?: string;
-  };
+  } = {};
+  if (raw) {
+    try {
+      data = JSON.parse(raw) as typeof data;
+    } catch {
+      data = {};
+    }
+  }
 
   if (!response.ok) {
     const detail = data.detail;
-    let message = data.message ?? "Request failed.";
+    let message = data.message;
     let verificationUrl = data.verification_url;
 
     if (typeof detail === "string") {
@@ -56,8 +64,18 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
       verificationUrl = detail.verification_url ?? verificationUrl;
     }
 
-    throw new ApiError(response.status, message || "Request failed.", verificationUrl);
+    if (!message) {
+      if (response.status >= 500) {
+        message = "Server error. Please try again.";
+      } else if (raw && !raw.trim().startsWith("{") && !raw.trim().startsWith("<")) {
+        message = raw.trim().slice(0, 180);
+      } else {
+        message = "Request failed.";
+      }
+    }
+
+    throw new ApiError(response.status, message, verificationUrl);
   }
 
-  return data as T;
+  return (raw ? data : {}) as T;
 }

@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -55,20 +53,12 @@ class Settings(BaseSettings):
         return self.environment.lower() == "production"
 
     def cookie_flags(self) -> dict[str, str | bool]:
-        if not self.is_production:
-            return {
-                "httponly": True,
-                "samesite": "lax",
-                "secure": False,
-                "path": "/",
-            }
-        frontend_host = urlparse(self.frontend_url).hostname
-        backend_host = urlparse(self.backend_url).hostname
-        cross_site = bool(frontend_host and backend_host and frontend_host != backend_host)
+        # Login is proxied through the frontend host, so Lax is enough and
+        # avoids SameSite=None cookie issues on Vercel rewrites.
         return {
             "httponly": True,
-            "samesite": "none" if cross_site else "lax",
-            "secure": True,
+            "samesite": "lax",
+            "secure": self.is_production,
             "path": "/",
         }
 

@@ -1,8 +1,18 @@
 from fastapi.testclient import TestClient
 
+from app.core.security import hash_password, password_needs_rehash, verify_password
 from app.main import app
 
 client = TestClient(app)
+
+
+def test_password_hash_roundtrip():
+    hashed = hash_password("correct-horse-battery")
+    assert hashed.startswith("pbkdf2_sha256$")
+    assert verify_password("correct-horse-battery", hashed)
+    assert not verify_password("wrong-password", hashed)
+    assert not password_needs_rehash(hashed)
+    assert password_needs_rehash("$argon2id$v=19$m=65536,t=3,p=4$c2FsdA$hash")
 
 
 def test_health_connected():
