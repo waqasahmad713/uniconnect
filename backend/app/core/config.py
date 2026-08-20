@@ -48,6 +48,9 @@ class Settings(BaseSettings):
             if email.strip()
         ]
 
+    def is_listed_admin_email(self, email: str) -> bool:
+        return email.strip().lower() in self.admin_email_list
+
     @property
     def is_production(self) -> bool:
         return self.environment.lower() == "production"
