@@ -1,0 +1,1139 @@
+# UniConnect — Full-Stack Development Master Prompt
+
+You are a senior full-stack software architect and developer. Help me build a production-ready public university community platform called **UniConnect**.
+
+## 1. Project Vision
+
+UniConnect is a public, text-first community platform for university students, alumni, faculty, and other members of the university community.
+
+The platform should allow users to:
+
+* Create accounts
+* Login securely
+* Verify their email
+* Reset forgotten passwords through email
+* Create professional profiles
+* Share ideas
+* Ask questions
+* Start discussions
+* Share resources
+* Post jobs and internships
+* Find collaborators
+* Discover students and alumni
+* Connect with other users
+* Comment on posts
+* Like posts
+* Save posts
+* Receive notifications
+* Report inappropriate content
+* Attend/discover events
+
+The platform should NOT be designed as TikTok, Instagram Reels, or a video-sharing platform.
+
+The primary content should be:
+
+* Text
+* Images
+* Links
+* PDFs/documents
+* GitHub repositories
+* Portfolio links
+
+Do not create a video-first feed or autoplay video system.
+
+---
+
+# 2. Important User Requirements
+
+There is no university email system available.
+
+University registration numbers look like:
+
+`awkum-25225237376`
+
+However, I do NOT have the complete list of university registration numbers.
+
+Therefore:
+
+* Registration number must NOT be required for account creation.
+* Do NOT automatically verify users using registration numbers.
+* Registration number can be an optional profile field.
+* University affiliation verification can be added later through admin verification.
+* Users can register using their personal email address.
+
+The website itself should be public.
+
+Visitors should be able to browse public profiles, posts, discussions, opportunities, and events without creating an account.
+
+However, users must authenticate before they can:
+
+* Create posts
+* Comment
+* Like
+* Save
+* Connect
+* Message
+* Post opportunities
+* Create events
+
+---
+
+# 3. Technology Stack
+
+Use the following stack unless there is a strong technical reason to change it:
+
+## Frontend
+
+* Next.js
+* TypeScript
+* Tailwind CSS
+* Responsive design
+* Modern component architecture
+
+## Backend
+
+* Python
+* FastAPI
+* Pydantic
+* SQLAlchemy
+* Alembic
+
+## Database
+
+* PostgreSQL
+
+The production database will eventually be hosted on Neon.
+
+## Authentication
+
+Implement secure authentication using:
+
+* Email/password
+* Password hashing using Argon2id or bcrypt
+* JWT or secure session-based authentication
+* Email verification
+* Forgot-password flow
+* Secure password-reset tokens
+* Token expiration
+* Single-use password reset tokens
+
+## Deployment
+
+Prepare the project for:
+
+* Frontend → Vercel
+* Backend → Render
+* PostgreSQL → Neon
+* Image/file storage → Cloudinary or equivalent
+* Transactional email → suitable production email provider
+
+Use environment variables for all secrets.
+
+Never hard-code credentials.
+
+---
+
+# 4. Authentication Workflow
+
+Implement the complete authentication lifecycle.
+
+## Registration
+
+User provides:
+
+* Full name
+* Email
+* Password
+* Confirm password
+* University
+* Department
+* Role
+* Batch
+* Optional registration number
+
+Roles:
+
+* Student
+* Alumni
+* Faculty
+* Other
+
+After successful registration:
+
+1. Validate all fields.
+2. Check whether email already exists.
+3. Hash the password securely.
+4. Create the user.
+5. Generate a secure email-verification token.
+6. Send a verification email.
+7. Mark the account as unverified.
+8. Ask the user to verify their email.
+
+## Email Verification
+
+User clicks the verification link.
+
+The backend:
+
+1. Validates the token.
+2. Checks expiration.
+3. Marks email as verified.
+4. Invalidates the token.
+5. Redirects the user to login.
+
+## Login
+
+User enters:
+
+* Email
+* Password
+
+Backend:
+
+1. Find user.
+2. Verify password.
+3. Check account status.
+4. Check email verification status.
+5. Create secure authentication session/token.
+6. Return authenticated user information.
+
+## Forgot Password
+
+User clicks:
+
+`Forgot Password?`
+
+Then:
+
+1. User enters email.
+2. Backend generates a secure random reset token.
+3. Store only the secure representation of the token if appropriate.
+4. Set an expiration time.
+5. Send password reset email.
+6. Never reveal whether an email exists in a way that enables account enumeration.
+
+The email contains a secure reset link.
+
+Example:
+
+`https://yourdomain.com/reset-password?token=...`
+
+## Reset Password
+
+User opens the reset link.
+
+The backend:
+
+1. Validates the token.
+2. Checks expiration.
+3. Checks that it has not already been used.
+4. Allows the user to create a new password.
+5. Hashes the new password.
+6. Updates the password.
+7. Invalidates the reset token.
+8. Invalidates existing sessions if appropriate.
+9. Redirects the user to login.
+
+Never send or store plaintext passwords.
+
+---
+
+# 5. User Profile
+
+Every user should have a profile containing:
+
+* Profile picture
+* Full name
+* University
+* Department
+* Role
+* Batch
+* Optional registration number
+* Bio
+* Current job
+* Company
+* Skills
+* Location
+* LinkedIn
+* GitHub
+* Portfolio
+* Verification status
+
+Registration number must not be publicly displayed by default.
+
+Example:
+
+Waqas Ahmad
+
+AI Engineer
+
+BS Artificial Intelligence
+Batch 2025
+
+Skills:
+
+* Python
+* Computer Vision
+* Machine Learning
+* Deep Learning
+
+---
+
+# 6. Community Post System
+
+Users can create posts.
+
+Post types:
+
+* Idea
+* Question
+* Discussion
+* Resource
+* Job
+* Internship
+* Collaboration
+
+A post contains:
+
+* Title
+* Content
+* Category
+* Tags
+* Optional image
+* Optional document
+* Optional external URL
+* Optional GitHub URL
+* Created date
+* Updated date
+* Author
+
+Users can:
+
+* Like
+* Comment
+* Reply to comments
+* Save
+* Share/copy link
+* Report
+* Edit their own posts
+* Delete their own posts
+
+Do not implement a video-first feed.
+
+---
+
+# 7. Feed
+
+Create a clean professional feed.
+
+Example:
+
+```text
+AI Project Idea
+
+Waqas Ahmad
+AI Engineer • Batch 2025
+
+I am thinking about building an AI system
+for Pakistani farmers...
+
+#AI #Agriculture #ComputerVision
+
+Like   Comment   Save   Share
+```
+
+The feed should prioritize useful community content rather than engagement-bait.
+
+---
+
+# 8. Discover System
+
+Create a Discover page where users can find people.
+
+Allow searching/filtering by:
+
+* Name
+* University
+* Department
+* Batch
+* Role
+* Skills
+* Location
+* Company
+* Job title
+
+Example:
+
+Search:
+
+`Computer Vision`
+
+Results:
+
+Ahmed Khan
+Computer Vision Engineer
+Batch 2022
+
+Python • YOLO • OpenCV
+
+[View Profile] [Connect]
+
+---
+
+# 9. Connection System
+
+Implement:
+
+* Send connection request
+* Accept request
+* Reject request
+* Cancel request
+* Remove connection
+* View connections
+
+Connection statuses:
+
+* Pending
+* Accepted
+* Rejected
+* Cancelled
+
+---
+
+# 10. Messaging
+
+Prepare a simple private messaging system.
+
+Users who are connected should be able to communicate.
+
+Implement:
+
+* Conversations
+* Messages
+* Read/unread status
+* Message timestamps
+* Notifications
+
+Keep the first version simple.
+
+Do not implement real-time WebSockets unless needed. A basic architecture can be implemented first and upgraded later.
+
+---
+
+# 11. Opportunities
+
+Create an Opportunities section.
+
+Types:
+
+* Jobs
+* Internships
+* Projects
+* Research opportunities
+* Freelance opportunities
+
+Each opportunity should contain:
+
+* Title
+* Company/organization
+* Description
+* Location
+* Remote/on-site/hybrid
+* Skills
+* Deadline
+* Application URL/contact
+* Author
+* Created date
+
+Users can browse and search opportunities.
+
+---
+
+# 12. Events
+
+Create an Events section.
+
+Events contain:
+
+* Title
+* Description
+* Date
+* Time
+* Location
+* Online/offline
+* Organizer
+* Registration URL
+* Image
+* Created date
+
+Examples:
+
+* Alumni meetup
+* Workshop
+* Seminar
+* Hackathon
+* Career event
+
+---
+
+# 13. Notifications
+
+Create notifications for:
+
+* New connection request
+* Connection accepted
+* Post like
+* New comment
+* Comment reply
+* New message
+* Opportunity updates
+* Event reminders
+
+Create a notification center.
+
+---
+
+# 14. Moderation
+
+Because the website is public, implement moderation.
+
+Users can report:
+
+* Spam
+* Harassment
+* Scam
+* Fake profile
+* Inappropriate content
+* Other
+
+Admins can:
+
+* View reports
+* Remove posts
+* Remove comments
+* Suspend users
+* Restore content
+* Dismiss reports
+
+---
+
+# 15. Admin Dashboard
+
+Create a separate admin dashboard.
+
+Dashboard statistics:
+
+* Total users
+* Active users
+* Total posts
+* Total comments
+* Total opportunities
+* Total events
+* Pending reports
+
+Admin sections:
+
+* Users
+* Posts
+* Comments
+* Reports
+* Opportunities
+* Events
+* Categories
+* Tags
+
+Admins should be able to:
+
+* Suspend users
+* Delete content
+* Review reports
+* Manage categories
+* Feature important posts
+* Manage events
+* Verify university affiliation manually
+
+Use role-based authorization.
+
+Normal users must never access admin functionality.
+
+---
+
+# 16. Database Design
+
+Start with these tables:
+
+```text
+users
+posts
+comments
+likes
+bookmarks
+connections
+messages
+conversations
+notifications
+opportunities
+events
+reports
+tags
+post_tags
+email_verification_tokens
+password_reset_tokens
+```
+
+Use:
+
+* UUID or secure IDs where appropriate
+* Foreign keys
+* Indexes
+* Unique constraints
+* Timestamps
+* Proper cascade behavior
+
+Use Alembic for database migrations.
+
+---
+
+# 17. API Structure
+
+Use clean REST APIs.
+
+Example:
+
+```text
+/api/auth/register
+/api/auth/login
+/api/auth/logout
+/api/auth/verify-email
+/api/auth/resend-verification
+/api/auth/forgot-password
+/api/auth/reset-password
+
+/api/users/me
+/api/users/{id}
+/api/users/search
+
+/api/posts
+/api/posts/{id}
+/api/posts/{id}/comments
+/api/posts/{id}/like
+/api/posts/{id}/save
+/api/posts/{id}/report
+
+/api/connections
+/api/connections/request
+/api/connections/{id}/accept
+/api/connections/{id}/reject
+
+/api/messages
+/api/conversations
+
+/api/opportunities
+/api/events
+
+/api/notifications
+
+/api/admin/users
+/api/admin/posts
+/api/admin/reports
+```
+
+Use proper HTTP status codes and consistent error responses.
+
+---
+
+# 18. Frontend Pages
+
+Create:
+
+```text
+/
+ /discover
+ /community
+ /opportunities
+ /events
+
+ /login
+ /register
+ /forgot-password
+ /reset-password
+ /verify-email
+
+ /profile/[username]
+ /settings
+
+ /messages
+ /notifications
+
+ /admin
+ /admin/users
+ /admin/posts
+ /admin/reports
+ /admin/opportunities
+ /admin/events
+```
+
+Make the UI:
+
+* Modern
+* Clean
+* Professional
+* Responsive
+* Mobile-friendly
+* Accessible
+* Fast
+
+Avoid copying Facebook, LinkedIn, or Reddit directly.
+
+Create an original visual identity.
+
+---
+
+# 19. Security Requirements
+
+Security is a priority.
+
+Implement:
+
+* Secure password hashing
+* Input validation
+* Authorization
+* Rate limiting
+* Secure authentication
+* Token expiration
+* Password reset expiration
+* Email verification
+* SQL injection protection
+* XSS protection
+* Proper CORS configuration
+* Secure HTTP headers
+* File upload validation
+* File size limits
+* Content-type validation
+* Account enumeration protection
+* Audit logging for sensitive admin actions
+
+Never expose:
+
+* Password hashes
+* Reset tokens
+* Verification tokens
+* Private messages
+* Private user information
+
+Use `.env` for secrets.
+
+Provide `.env.example`.
+
+---
+
+# 20. File Uploads
+
+Users may upload:
+
+* Profile pictures
+* Post images
+* Documents
+
+Validate:
+
+* File type
+* File size
+* File extension
+* MIME type
+
+Store files using Cloudinary or another proper object-storage service.
+
+Do not store large files directly inside PostgreSQL.
+
+---
+
+# 21. Project Structure
+
+Use a clean monorepo:
+
+```text
+uniconnect/
+│
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── hooks/
+│   ├── types/
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── core/
+│   │   ├── database/
+│   │   ├── auth/
+│   │   ├── users/
+│   │   ├── posts/
+│   │   ├── comments/
+│   │   ├── connections/
+│   │   ├── messages/
+│   │   ├── opportunities/
+│   │   ├── events/
+│   │   ├── notifications/
+│   │   ├── reports/
+│   │   └── admin/
+│   │
+│   ├── alembic/
+│   ├── tests/
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 22. Development Method
+
+IMPORTANT:
+
+Do NOT generate the entire application in one response.
+
+Build it incrementally.
+
+Follow this exact sequence:
+
+### Phase 1
+
+Project setup.
+
+Create:
+
+* Repository structure
+* Frontend
+* Backend
+* Environment configuration
+* PostgreSQL connection
+* Basic README
+
+### Phase 2
+
+Database models and migrations.
+
+### Phase 3
+
+Authentication:
+
+* Register
+* Email verification
+* Login
+* Logout
+* Forgot password
+* Reset password
+
+### Phase 4
+
+User profiles.
+
+### Phase 5
+
+Posts.
+
+### Phase 6
+
+Comments, likes, bookmarks, reports.
+
+### Phase 7
+
+Discover and connections.
+
+### Phase 8
+
+Messaging and notifications.
+
+### Phase 9
+
+Opportunities and events.
+
+### Phase 10
+
+Admin dashboard and moderation.
+
+### Phase 11
+
+Testing and security.
+
+### Phase 12
+
+Deployment.
+
+### Phase 13
+
+AI features.
+
+After completing each phase:
+
+1. Explain what was implemented.
+2. Show changed files.
+3. Provide exact commands to run.
+4. Explain how to test it.
+5. Fix errors before moving to the next phase.
+6. Do not continue to the next phase until the current phase works.
+
+---
+
+# 23. Development Environment
+
+Assume I am developing locally using:
+
+* Ubuntu
+* VS Code
+* Git
+* Python 3.12+
+* Node.js LTS
+* PostgreSQL or Neon
+* Bash terminal
+
+Give commands specifically for Ubuntu.
+
+---
+
+# 24. Git Workflow
+
+Use meaningful commits:
+
+```text
+feat: initialize project
+feat: add database models
+feat: implement registration
+feat: implement email verification
+feat: implement login
+feat: implement password reset
+feat: add user profiles
+feat: add community posts
+feat: add comments and likes
+feat: add connections
+feat: add opportunities
+feat: add events
+feat: add admin dashboard
+fix: ...
+```
+
+---
+
+# 25. Testing
+
+Create backend tests using pytest.
+
+Test:
+
+* Registration
+* Login
+* Invalid login
+* Duplicate email
+* Email verification
+* Password reset
+* Expired reset token
+* Profile updates
+* Post creation
+* Comments
+* Likes
+* Connections
+* Authorization
+* Admin permissions
+
+For frontend, test important user flows.
+
+---
+
+# 26. Deployment
+
+Prepare production deployment.
+
+Frontend:
+
+```text
+Next.js → GitHub → Vercel
+```
+
+Backend:
+
+```text
+FastAPI → GitHub → Render
+```
+
+Database:
+
+```text
+PostgreSQL → Neon
+```
+
+Storage:
+
+```text
+Cloudinary
+```
+
+Configure environment variables separately for development and production.
+
+Never commit:
+
+```text
+.env
+```
+
+to GitHub.
+
+---
+
+# 27. Production Domain
+
+Initially use:
+
+```text
+https://your-project.vercel.app
+```
+
+Later support:
+
+```text
+https://yourdomain.com
+```
+
+Backend can use:
+
+```text
+https://api.yourdomain.com
+```
+
+Configure:
+
+* HTTPS
+* CORS
+* Production database
+* Production email
+* Production storage
+* Environment variables
+
+---
+
+# 28. Future AI Layer
+
+Do not implement AI in V1.
+
+After the platform has real users and content, add:
+
+### Semantic search
+
+Find relevant posts, people, opportunities, and discussions based on meaning rather than exact keywords.
+
+### Alumni matching
+
+Recommend people based on:
+
+* Skills
+* Interests
+* Experience
+* Goals
+
+### Mentor matching
+
+Match students with alumni.
+
+### Similar discussions
+
+When a user asks a question, find related previous discussions.
+
+### AI community assistant
+
+Answer questions using the platform's public community data.
+
+Use embeddings/vector search/RAG only when there is a real use case.
+
+---
+
+# 29. Important Product Rules
+
+The platform should be:
+
+* Public
+* Professional
+* Community-driven
+* Text-first
+* University-focused
+* Useful rather than addictive
+* Safe
+* Privacy-conscious
+
+Do NOT implement:
+
+* TikTok-style infinite video feed
+* Autoplay videos
+* Fake engagement
+* Fake users
+* Automated spam
+* Manipulative engagement mechanisms
+* Scraping private information
+* Selling user data
+
+---
+
+# 30. How You Should Work With Me
+
+I am learning while building this project.
+
+Therefore, do not just dump code.
+
+For every implementation:
+
+1. Explain the purpose.
+2. Explain the architecture.
+3. Show the folder/file being created.
+4. Provide complete code.
+5. Explain where to put the code.
+6. Give installation commands.
+7. Give run commands.
+8. Give testing instructions.
+9. Explain common errors.
+10. Wait for my result/error before moving forward.
+
+Keep the code clean and production-oriented.
+
+Do not use unnecessary libraries.
+
+Do not duplicate configuration.
+
+Keep environment variables centralized.
+
+Do not silently change the technology stack.
+
+If a design decision is important, explain the decision before implementing it.
+
+---
+
+# FIRST TASK
+
+Do NOT build the entire application yet.
+
+Start with **PHASE 1 ONLY**.
+
+Create the initial UniConnect project structure for:
+
+* Next.js frontend
+* FastAPI backend
+* PostgreSQL configuration
+* Environment files
+* Git configuration
+* Basic README
+
+Then explain exactly:
+
+1. What to install on Ubuntu.
+2. How to create the project directory.
+3. How to initialize Git.
+4. How to create the frontend.
+5. How to create the backend.
+6. How to configure the environment.
+7. How to start frontend and backend locally.
+8. How to verify that both are working.
+
+After that, stop and wait for my confirmation before implementing Phase 2.

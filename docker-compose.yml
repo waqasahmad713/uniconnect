@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16
+    container_name: uniconnect-postgres
+    environment:
+      POSTGRES_USER: uniconnect
+      POSTGRES_PASSWORD: uniconnect
+      POSTGRES_DB: uniconnect
+    ports:
+      - "5434:5432"
+    volumes:
+      - uniconnect_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uniconnect -d uniconnect"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  uniconnect_pgdata:

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4efe6;
+  --ink: #16211e;
+  --ink-soft: #3d4a46;
+  --line: #d9cfc0;
+  --accent: #c45c26;
+  --accent-dark: #9b4318;
+  --teal: #2a6b63;
+  --card: #fffaf3;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-teal: var(--teal);
+  --color-card: var(--card);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+::selection {
+  background: #c45c26;
+  color: #fffaf3;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.hub-action span,
+.card-hover a {
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(22, 33, 30, 0.08);
+  }
+
+  a,
+  button {
+    transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, transform 0.25s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
