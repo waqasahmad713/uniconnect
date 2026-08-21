@@ -59,7 +59,7 @@ export function HomeHub({ me }: { me: UserMe }) {
 
   useEffect(() => {
     setScene(consumeJustSignedIn() ? "welcome" : "hub");
-    apiFetch<Post[]>("/api/posts?exclude_type=question")
+    apiFetch<Post[]>("/api/posts")
       .then((data) => setPosts(data.slice(0, 4)))
       .catch(() => setPosts([]));
     apiFetch<Opportunity[]>("/api/opportunities")

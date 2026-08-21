@@ -24,7 +24,7 @@ export default function QuestionsPage() {
           <Link href="/community" className="block rounded-2xl border border-line bg-card p-5">
             <p className="font-display text-xl">Go to Feed</p>
             <p className="mt-2 text-sm text-ink-soft">
-              Ideas, discussions, and resources stay on the feed.
+            Ideas, discussions, resources, and questions all show on the feed.
             </p>
           </Link>
         </>

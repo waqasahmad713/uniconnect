@@ -154,7 +154,7 @@ export function PostStream({
               <div>
                 <p className="font-display text-xl text-ink">You&apos;re in the room.</p>
                 <p className="mt-1 text-sm text-ink-soft">
-                  Like, comment, and save posts. Questions belong in Q&amp;A so the feed stays readable.
+                  Like, comment, and save posts. New questions also appear here in the feed.
                 </p>
               </div>
               <Link
