@@ -24,7 +24,7 @@ export function BrandMark({
             inverted ? "text-paper" : "text-ink"
           }`}
         >
-          AWKUM CS
+          Grad CS
         </span>
         {compact ? null : (
           <span
@@ -32,7 +32,7 @@ export function BrandMark({
               inverted ? "text-white/60" : "text-ink-soft"
             }`}
           >
-            Computer Science Community
+            CS Graduate Community
           </span>
         )}
       </span>

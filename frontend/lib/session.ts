@@ -1,4 +1,4 @@
-const JUST_SIGNED_IN = "awkum-cs-just-signed-in";
+const JUST_SIGNED_IN = "grad-cs-just-signed-in";
 
 export function markJustSignedIn() {
   sessionStorage.setItem(JUST_SIGNED_IN, "1");

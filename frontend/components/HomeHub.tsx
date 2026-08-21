@@ -16,28 +16,28 @@ const actions = [
     href: "/questions",
     kicker: "Ask",
     title: "Post a question",
-    body: "Stuck on code, an assignment, or a concept? The department is here.",
+    body: "Stuck on code, an assignment, or a concept? The community is here.",
     className: "from-[#1d5f7a] to-[#2a6b63]",
   },
   {
     href: "/community",
     kicker: "Read",
     title: "Open the feed",
-    body: "Ideas, discussions, and resources from CS students and faculty.",
+    body: "Ideas, discussions, and resources from CS graduates and students.",
     className: "from-[#c45c26] to-[#9b4318]",
   },
   {
     href: "/opportunities",
     kicker: "Apply",
     title: "Find internships",
-    body: "Jobs, research, and internships shared with AWKUM CS.",
+    body: "Jobs, research, and internships shared with CS graduates.",
     className: "from-[#2a6b63] to-[#1d4a45]",
   },
   {
     href: "/discover",
     kicker: "Meet",
-    title: "Find classmates",
-    body: "Search students, alumni, and faculty by name, skill, or batch.",
+    title: "Find graduates",
+    body: "Search CS graduates, students, and professionals by name, skill, or batch.",
     className: "from-[#6b3d7a] to-[#3d2a4a]",
   },
 ];
@@ -135,11 +135,11 @@ export function HomeHub({ me }: { me: UserMe }) {
       <main className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 py-8 sm:px-6 sm:py-12">
         <section className="hub-hero">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-teal sm:text-xs sm:tracking-[0.2em]">
-            {greeting} · AWKUM CS
+            {greeting} · Grad CS
           </p>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
             <h1 className="font-display max-w-2xl text-4xl leading-tight text-ink sm:text-5xl md:text-6xl">
-              {name}, pick up where the department left off.
+              {name}, pick up where the community left off.
             </h1>
             <Link href={`/profile/${me.username}`} className="flex items-center gap-3 rounded-full border border-line bg-card py-2 pl-2 pr-4">
               <Avatar name={me.full_name} src={me.profile_picture_url} />
@@ -229,7 +229,7 @@ export function HomeHub({ me }: { me: UserMe }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-dark">Your space</p>
                 <h2 className="font-display mt-1 text-2xl">Finish your profile</h2>
                 <p className="mt-2 text-sm leading-6 text-ink-soft">
-                  Add {profileGaps.join(", ")} so classmates recognize you in the feed.
+                  Add {profileGaps.join(", ")} so people in the community recognize you.
                 </p>
               </Link>
             ) : null}

@@ -11,7 +11,7 @@ import type { UserMe } from "@/types";
 const sections = [
   {
     title: "Feed",
-    body: "Ideas, discussions, and resources from CS students, alumni, and faculty.",
+    body: "Ideas, discussions, and resources from CS graduates, students, and professionals.",
     href: "/community",
   },
   {
@@ -21,7 +21,7 @@ const sections = [
   },
   {
     title: "Opportunities",
-    body: "Find internships, jobs, and research posts — then share them with classmates.",
+    body: "Find internships, jobs, and research posts — then share them with the community.",
     href: "/opportunities",
   },
 ];
@@ -98,14 +98,14 @@ function PublicHome() {
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
             <p className="hero-mark text-[11px] font-semibold uppercase tracking-[0.16em] text-teal sm:text-xs sm:tracking-[0.2em]">
-              Abdul Wali Khan University Mardan
+              CS Graduate Community
             </p>
             <h1 className="hero-title font-display mt-4 max-w-xl text-4xl leading-tight text-ink sm:text-5xl md:text-6xl">
-              Computer Science Community
+              For CS graduates, by CS graduates.
             </h1>
             <p className="hero-copy mt-5 max-w-lg text-base leading-7 text-ink-soft sm:mt-6 sm:text-lg sm:leading-8">
-              A text-first space for the CS department: ask questions, follow the
-              feed, and stay connected with students, alumni, and faculty.
+              A text-first space to ask questions, follow the feed, and stay connected
+              with Computer Science graduates, students, and professionals.
             </p>
             <div className="hero-actions mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
               <Link
@@ -129,11 +129,11 @@ function PublicHome() {
             </div>
           </div>
           <aside className="hero-panel rounded-3xl border border-line bg-card p-5 shadow-[0_16px_40px_rgba(22,33,30,0.06)] sm:p-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">Department</p>
-            <h2 className="font-display mt-2 text-3xl">CS at AWKUM</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">Community</p>
+            <h2 className="font-display mt-2 text-3xl">Grad CS</h2>
             <ul className="mt-6 space-y-3 text-sm leading-6 text-ink-soft">
-              <li className="rounded-xl bg-paper px-4 py-3">Students share work, notes, and ideas.</li>
-              <li className="rounded-xl bg-paper px-4 py-3">Alumni and faculty can answer questions.</li>
+              <li className="rounded-xl bg-paper px-4 py-3">Graduates share work, notes, and ideas.</li>
+              <li className="rounded-xl bg-paper px-4 py-3">Peers can answer questions and open doors.</li>
               <li className="rounded-xl bg-paper px-4 py-3">No video feed — write, discuss, and help.</li>
             </ul>
           </aside>

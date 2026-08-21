@@ -26,7 +26,7 @@ export function OpportunityCard({
   async function share() {
     const result = await shareLink({
       title: `${item.title} at ${item.organization}`,
-      text: `Opportunity for AWKUM CS: ${item.title} at ${item.organization}`,
+      text: `Opportunity for CS graduates: ${item.title} at ${item.organization}`,
       url: pageUrl(path),
     });
     if (result === "copied") setMessage("Link copied. You can paste it in WhatsApp or email.");

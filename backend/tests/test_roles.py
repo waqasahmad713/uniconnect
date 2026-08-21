@@ -14,7 +14,7 @@ def _register_and_login(email: str, password: str = "correct-horse-battery") -> 
         "email": email,
         "password": password,
         "confirm_password": password,
-        "university": "Abdul Wali Khan University Mardan",
+        "university": "Example University",
         "department": "Artificial Intelligence",
         "role": "student",
         "batch": "2025",

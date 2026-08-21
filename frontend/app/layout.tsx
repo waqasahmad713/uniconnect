@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "AWKUM CS — Computer Science Community",
+  title: "Grad CS — Computer Science Graduate Community",
   description:
-    "The Computer Science community of Abdul Wali Khan University Mardan. Ask questions, follow the feed, and connect with students, alumni, and faculty.",
+    "A Computer Science graduate community. Ask questions, follow the feed, and connect with CS graduates, students, and professionals.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

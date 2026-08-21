@@ -51,8 +51,8 @@ export default function AdminOverviewPage() {
     <main ref={root} className="px-4 py-6 sm:px-8 sm:py-10">
       <h1 className="font-display text-3xl sm:text-4xl">Overview</h1>
       <p className="mt-2 max-w-2xl text-ink-soft">
-        Manage the AWKUM Computer Science community: members, feed posts, reports,
-        opportunities, and events. Students can ask questions, comment, like, and update
+        Manage the CS graduate community: members, feed posts, reports,
+        opportunities, and events. Members can ask questions, comment, like, and update
         their profile.
       </p>
       {stats ? (

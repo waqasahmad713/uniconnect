@@ -48,11 +48,11 @@ export default function OpportunitiesPage() {
     <div className="min-h-full">
       <Header />
       <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">AWKUM CS</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">Grad CS</p>
         <h1 className="font-display mt-2 text-3xl sm:text-4xl">Opportunities</h1>
         <p className="mt-3 max-w-2xl text-ink-soft">
-          Internships, jobs, research, and projects for the Computer Science community. Find one
-          that fits, then share it with classmates.
+          Internships, jobs, research, and projects for the CS graduate community. Find one
+          that fits, then share it with peers.
         </p>
 
         <form onSubmit={onSearch} className="mt-6 flex flex-col gap-3 sm:flex-row">

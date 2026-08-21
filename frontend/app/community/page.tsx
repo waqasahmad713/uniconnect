@@ -5,8 +5,8 @@ export default function FeedPage() {
   return (
     <PostStream
       eyebrow="CS feed"
-      title="What the department is sharing"
-      subtitle="Ideas, discussions, and resources from CS at AWKUM. Stay, read, and join the thread."
+      title="What the community is sharing"
+      subtitle="Ideas, discussions, and resources from CS graduates. Stay, read, and join the thread."
       query="exclude_type=question"
       defaultType="idea"
       typeOptions={["idea", "discussion", "resource", "job", "internship", "collaboration"]}
@@ -19,7 +19,7 @@ export default function FeedPage() {
       aside={
         <>
           <div className="rounded-2xl border border-line bg-card p-5 text-sm leading-7 text-ink-soft">
-            Browse ideas, discussions, and resources from CS at AWKUM. Like and comment. For homework help, use Questions.
+            Browse ideas, discussions, and resources from CS graduates. Like and comment. For homework help, use Questions.
           </div>
           <Link href="/questions" className="block rounded-2xl border border-[#7eb6d0] bg-[#e7f4fa] p-5">
             <p className="font-display text-xl text-[#1d5f7a]">Ask a question</p>

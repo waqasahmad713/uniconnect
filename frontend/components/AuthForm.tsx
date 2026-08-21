@@ -44,13 +44,13 @@ export function AuthShell({
         <BrandMark inverted />
         <div className="relative mt-auto max-w-md pb-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e7c9a8]">
-            Abdul Wali Khan University Mardan
+            CS Graduate Community
           </p>
           <h2 className="font-display mt-4 text-4xl leading-tight">
             Ask. Share. Stay with the CS community.
           </h2>
           <p className="mt-5 text-lg leading-8 text-white/70">
-            A text-first space for students, alumni, and faculty — questions, the feed, and internships in one place.
+            A text-first space for CS graduates, students, and professionals — questions, the feed, and internships in one place.
           </p>
         </div>
       </aside>
@@ -64,7 +64,7 @@ export function AuthShell({
             <ThemeToggle compact />
           </div>
           <p data-enter className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">
-            Abdul Wali Khan University Mardan
+            CS Graduate Community
           </p>
           <h1 data-enter className="font-display mt-3 text-3xl sm:text-4xl">
             {title}

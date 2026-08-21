@@ -31,7 +31,7 @@ def test_register_login_and_duplicate_email():
         "email": email,
         "password": password,
         "confirm_password": password,
-        "university": "Abdul Wali Khan University Mardan",
+        "university": "Example University",
         "department": "Artificial Intelligence",
         "role": "student",
         "batch": "2025",

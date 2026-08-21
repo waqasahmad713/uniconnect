@@ -20,8 +20,8 @@ export default function RegisterPage() {
 
   return (
     <AuthShell
-      title="Join AWKUM CS"
-      subtitle="Create an account for the Computer Science community at Abdul Wali Khan University Mardan."
+      title="Join Grad CS"
+      subtitle="Create an account for the Computer Science graduate community."
     >
       <form
         className="space-y-4"
@@ -76,7 +76,7 @@ export default function RegisterPage() {
           <PasswordInput name="confirm_password" autoComplete="new-password" required />
         </Field>
         <Field label="University">
-          <input className={inputClassName} name="university" required defaultValue="Abdul Wali Khan University Mardan" />
+          <input className={inputClassName} name="university" required placeholder="Your university or college" />
         </Field>
         <Field label="Department">
           <input className={inputClassName} name="department" required defaultValue="Computer Science" />
@@ -93,7 +93,7 @@ export default function RegisterPage() {
           <input className={inputClassName} name="batch" placeholder="2025" />
         </Field>
         <Field label="Registration number (optional, private by default)">
-          <input className={inputClassName} name="registration_number" placeholder="awkum-25225237376" />
+          <input className={inputClassName} name="registration_number" placeholder="Optional student ID" />
         </Field>
         {error ? <p className="text-sm text-accent-dark">{error}</p> : null}
         {message ? <p className="text-sm text-teal">{message}</p> : null}

@@ -6,12 +6,12 @@ export default function QuestionsPage() {
     <PostStream
       eyebrow="CS Q&A"
       title="Ask the CS community"
-      subtitle="Questions for AWKUM Computer Science students, alumni, and faculty."
+      subtitle="Questions for Computer Science graduates, students, and professionals."
       query="post_type=question"
       defaultType="question"
       typeOptions={["question"]}
       titlePlaceholder="What do you want to ask?"
-      bodyPlaceholder="Add context: what you tried, your department, or the problem you are stuck on."
+      bodyPlaceholder="Add context: what you tried, your background, or the problem you are stuck on."
       submitLabel="Post question"
       emptyText="No questions yet. Ask the first one."
       sharePath="/questions"
